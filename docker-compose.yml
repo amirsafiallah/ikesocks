@@ -1,0 +1,22 @@
+services:
+  ikesocks:
+    image: amirsafiallah/ikesocks:latest
+    build: .
+    container_name: ikesocks
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    network_mode: host
+    environment:
+      VPN_SERVER_IP: "${VPN_SERVER_IP}"
+      VPN_REMOTE_ID: "${VPN_REMOTE_ID}"
+      VPN_USERNAME: "${VPN_USERNAME}"
+      VPN_PASSWORD: "${VPN_PASSWORD}"
+      SOCKS_PORT: "${SOCKS_PORT:-1080}"
+      VPN_CRT_FILE: "/certs/ca.crt"
+      SOCKS_USERNAME: "${SOCKS_USERNAME}"
+      SOCKS_PASSWORD: "${SOCKS_PASSWORD}"
+    volumes:
+      - ./certs:/certs:ro

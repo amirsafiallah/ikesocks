@@ -1,0 +1,8 @@
+.env
+.git
+.gitignore
+.dockerignore
+.claude
+certs/
+README.md
+publish.sh
