@@ -2,6 +2,8 @@
 
 SOCKS5 proxy over IKEv2/IPsec. Runs as a Docker container using strongSwan and Dante — all proxied traffic exits through the VPN tunnel while the host network stays unaffected.
 
+> **Warning:** This container runs with `network_mode: host` because strongSwan needs direct access to the host's network namespace to install kernel-level XFRM/IPsec policies. This means the SOCKS proxy port is exposed on **all host interfaces** without Docker's usual network isolation. Make sure the port is firewalled or bind it to a trusted interface if running on a public-facing machine.
+
 ## Quick start
 
 1. Place your VPN provider's CA certificate at `./certs/ca.crt`.
